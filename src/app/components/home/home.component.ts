@@ -9,20 +9,20 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class HomeComponent {
 
-  // paises: any[] = [];
+  nuevasCanciones: any[] = [] ; 
+  loading: boolean;
 
-  //  Injeccion
-  // constructor( private http: HttpClient){
+  constructor(
+    private spotify: SpotifyService){
 
-  //   console.log('Constructor del Home');
-  //   this.http.get('https://restcountries.com/v3.1/lang/spa').subscribe( (resp:any) => {
-  //     this.paises = resp;
-  //       console.log(resp);
-  //   })
-  // }
+      this.loading = true;
 
-  constructor(private spotify: SpotifyService){
-    this.spotify.getNewRealeases();
+      this.spotify.getNewRealeases().subscribe( (resp:any) => {
+        // console.log(resp);
+        //  console.log(resp);
+         this.nuevasCanciones = resp; 
+         this.loading=false;
+      });
   }
 
 
